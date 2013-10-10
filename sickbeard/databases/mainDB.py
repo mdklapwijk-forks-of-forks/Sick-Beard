@@ -150,6 +150,7 @@ class NumericProviders (AddAirdateIndex):
                 9: 'dtt',
                 10: 'torrentleech',
                 11: 'kat',
+                12: 'publichd',
              }
                 
     def execute(self):
