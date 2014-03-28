@@ -233,10 +233,11 @@ class PublicHDProvider(generic.TorrentProvider):
             return False
 
         if not r.status_code == 200:
-            return False
-
-        magnetFileName = ek.ek(os.path.join, sickbeard.TORRENT_DIR, helpers.sanitizeFileName(result.name) + '.' + self.providerType)
-        magnetFileContent = r.content
+            magnetFileName = ek.ek(os.path.join, sickbeard.TORRENT_DIR, 'meta-' + torrent_hash + '.' + self.providerType)
+            magnetFileContent = 'd10:magnet-uri' + str(len(result.url)) + ':' + result.url + 'e'
+        else:
+            magnetFileName = ek.ek(os.path.join, sickbeard.TORRENT_DIR, helpers.sanitizeFileName(result.name) + '.' + self.providerType)
+            magnetFileContent = r.content
 
         try:
             with open(magnetFileName, 'wb') as fileOut:
